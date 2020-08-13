@@ -17,7 +17,7 @@
 ## Table of Content  
 
 * [About](#about)  
-* [Geting started](#geting_started)  
+* [Geting started](#geting-started)  
 * [Configuration](#configuration)  
 * [About me and us](#about_me_and_us)  
   
