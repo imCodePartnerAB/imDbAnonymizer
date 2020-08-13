@@ -21,11 +21,11 @@
 * [Configuration](#configuration)  
 * [About me and us](#about_me_and_us)  
   
-##About  
+## About  
 **This is an application made for KoHa. However it should not be a problem,   
 using it for other programs; Primarily, because it is very customizable.**  
 
-##Geting started  
+## Geting started  
 So, first of all this is a java application, and it uses mvn to compile.  
 This means that you are expected to know a little about java and mvn to  
 be able to compile and use this application. You are also expected to  
@@ -76,7 +76,7 @@ parameter **--xmlfile**. And this is when we move to the next session
 configuration.  
   
   
-##Configuration  
+## Configuration  
 The configuration works by editing the XML file, and you will also use  
 resource files. The resource files will contain lines that will be  
 randomly chosen and inserted in the database, in the field you chose.  
@@ -148,7 +148,7 @@ I hope this explanation is understandable, but feel free to give me any
 pointers on how to make it more understandable.  
   
   
-##About me and us  
+## About me and us  
 I work for imCode AB which is a Swedish company specialized in advanced  
 web-services, mostly for big organizations and communal services.  
   
@@ -168,7 +168,4 @@ internet service/application related of course.
   
   
   
-##Nothing to see here  
-Just a placeholder for Table of Content
-
 
