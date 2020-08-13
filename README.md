@@ -150,7 +150,7 @@ pointers on how to make it more understandable.
   
 ## About me and us  
 I work for imCode AB which is a Swedish company specialized in advanced  
-web-services, mostly for big organizations and communal services.  
+web-services, mostly for big organizations and municipalities services.  
   
 Here I work mainly as system developer and most of my time is managing  
 servers and applications running on these. From time to time I also get  
