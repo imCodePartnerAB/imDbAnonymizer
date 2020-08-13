@@ -1,13 +1,6 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![License?][license-shield]][license-url]
-
-<br />
 <p align="center">
   <a href="https://github.com/imCodePartnerAB/imDbAnonymizer">
-    <img src="https://icm.imcode.com/images/logo.gif" alt="Logo" width="80" height="80">
+    <img src="https://icm.imcode.com/images/logo.gif" alt="Logo" width="432" height="70">
   </a>
 
   <h3 align="center">imDbAnonymizer</h3>
