@@ -1,1 +1,0 @@
-java %XJC_OPTS% -jar ".jaxb-xjc-2.3.2.jar" %*
