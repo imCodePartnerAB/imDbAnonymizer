@@ -19,7 +19,7 @@
 * [About](#about)  
 * [Geting started](#geting-started)  
 * [Configuration](#configuration)  
-* [About me and us](#about_me_and_us)  
+* [About me and us](#about-me-and-us)  
   
 ## About  
 **This is an application made for KoHa. However it should not be a problem,   
