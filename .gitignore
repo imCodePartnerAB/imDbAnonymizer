@@ -2,3 +2,7 @@ target
 work
 **.svn
 .idea
+local_*
+.gitignore
+**.sql
+anonymize_*.sh
