@@ -18,7 +18,8 @@ public class Main {
         log.debug("Starting");
         try {
             //TODO Dont know why it cant do utf-8 maby reading files wrong??
-            System.setOut(new PrintStream(System.out,true,"Cp850"));
+            System.setOut(new PrintStream(System.out,true,"utf-8"));
+            //System.setOut(new PrintStream(System.out,true,"Cp850"));
         } catch (UnsupportedEncodingException e) {
             log.debug(e);
         }
@@ -44,7 +45,6 @@ public class Main {
 
     // Iterate through table rows, and update them using ResultSet
     private static void iterateTable(int tableId) {
-
         boolean _ret = false;
         try {
             String tblName = Value.getXmlRoot().getTables().getTable().get(tableId).getName();
@@ -56,18 +56,23 @@ public class Main {
                 for (int i = 0; i < Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().size(); i++) {
                     String fieldName = Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).getName();
                     String fieldValue = Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).getValue();
-                    String xmlValue=Value.getXmlValue(fieldValue);
+                    String xmlValue = Value.getXmlValue(fieldValue);
+                    
+                    // Ensure that the xmlValue is in UTF-8 format
+                    byte[] utf8Bytes = xmlValue.getBytes("UTF-8");
+                    String utf8Value = new String(utf8Bytes, "UTF-8");
+                    
                     if (_rs.wasNull()
-                        || (Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).ValidateChange(_rs.getString(fieldName))
-                        && !_rs.getString(fieldName).contains(xmlValue))) {
-                        _rs.updateNString(fieldName, xmlValue);
-                        updateStr += "`" + fieldName + "`=" + xmlValue+ ", ";
-                        _doUpdate=true;
+                            || (Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).ValidateChange(_rs.getString(fieldName))
+                                    && !_rs.getString(fieldName).contains(utf8Value))) {
+                        _rs.updateNString(fieldName, utf8Value);
+                        updateStr += "`" + fieldName + "`=" + utf8Value + ", ";
+                        _doUpdate = true;
                     }
                 }
                 if (_doUpdate) {
                     updateStr = updateStr.replaceAll(", $", " ");
-                    updateStr += " WHERE  `" + tblIdField + "`=" + _rs.getString(tblIdField) + ";";
+                    updateStr += " WHERE `" + tblIdField + "`=" + _rs.getString(tblIdField) + ";";
                     log.debug("Done update: " + updateStr);
                     _rs.updateRow();
                 }
@@ -75,34 +80,35 @@ public class Main {
             _rs.close();
             log.debug("\n\n");
         } catch (Exception e) {
-            //e.printStackTrace();
+            // e.printStackTrace();
             log.debug(e);
         }
     }
 
     // Iterate through table rows, and output SQL statements
     private static void generateSQL(int tableId) {
-        //_db = new db();
         boolean _ret = false;
         try {
             String tblName = Value.getXmlRoot().getTables().getTable().get(tableId).getName();
             String tblIdField = Value.getXmlRoot().getTables().getTable().get(tableId).getIdfield();
-            ResultSet _rs = _db.GetRS("SELECT * FROM " + tblName);// + " LIMIT 0,10");
-
+            ResultSet _rs = _db.GetRS("SELECT * FROM " + tblName);
+    
             while (_rs.next()) {
                 boolean _doUpdate = false;
                 String updateStr = "UPDATE " + tblName + " SET ";
                 for (int i = 0; i < Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().size(); i++) {
                     String fieldName = Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).getName();
                     String fieldValue = Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).getValue();
-                    String xmlValue=Value.getXmlValue(fieldValue);
-
-                    //log.debug(_rs.getString(fieldName)+" " + fieldName);
+                    String xmlValue = Value.getXmlValue(fieldValue);
+    
+                    // Ensure that the xmlValue is in UTF-8 format
+                    byte[] utf8Bytes = xmlValue.getBytes("UTF-8");
+                    String utf8Value = new String(utf8Bytes, "UTF-8");
+    
                     if ((Value.getXmlRoot().getTables().getTable().get(tableId).getFields().getField().get(i).ValidateChange(_rs.getString(fieldName))
-                            && !(_rs.getString(fieldName)+"").contains(xmlValue))) {
-                        //log.debug( _rs.getString(fieldName)+" ?=? "+xmlValue );
-                        updateStr += "`" + fieldName + "`=" + xmlValue + ", ";
-                        _doUpdate=true;
+                            && !(_rs.getString(fieldName) + "").contains(utf8Value))) {
+                        updateStr += "`" + fieldName + "`=" + utf8Value + ", ";
+                        _doUpdate = true;
                     }
                 }
                 if (_doUpdate) {
@@ -118,4 +124,5 @@ public class Main {
             log.debug(e);
         }
     }
+    
 }
